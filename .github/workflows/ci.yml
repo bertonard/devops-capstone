@@ -27,11 +27,11 @@ jobs:
 
 
       - name: Run tests
-  env:
-    PYTHONPATH: .
-  run: |
+        env:
+          PYTHONPATH: .
+        run: |
   
-    python -m pytest app/tests
+          python -m pytest app/tests
         
 
       - name: Build Docker image
