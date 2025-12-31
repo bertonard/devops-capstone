@@ -32,7 +32,20 @@ jobs:
         run: |
   
           python -m pytest app/tests
-        
+      
+      
+      - name: Log in to GHCR
+        run: |
+          echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
+
+      - name: Build Docker image
+        run: |
+          docker build -t ghcr.io/${{ secrets.GHCR_USERNAME }}/devops-capstone:${{ github.sha }} .
+
+      - name: Push Docker image
+        run: |
+          docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/devops-capstone:${{ github.sha }}
+       
 
       - name: Build Docker image
         run: |
